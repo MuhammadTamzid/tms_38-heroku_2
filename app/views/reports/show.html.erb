@@ -1,0 +1,41 @@
+<% provide(:title, current_user.name) %>
+<h1>Report on <%= l @report.report_date, format: :short %></h1>
+<div class="row">
+  <div class="panel panel-default panel-box">
+    <div class="panel-heading panel-schedule">
+       <%= t(:schdl) %>
+       <strong>
+        <%= @report.from_time %> - <%= @report.to_time %>
+       </strong>
+      <div class="pull-right">
+        <% if params[:user_id] != nil %>
+          <%= link_to t(:view_all), reports_path(user_id: params[:user_id]),
+            class: "btn btn-default" %>
+        <% else %>
+          <%= link_to t(:view_all), reports_path,
+            class: "btn btn-default" %>
+          <%= link_to t(:edit), edit_report_path(@report),
+            class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <p><strong><%= t(:acvmnt) %></strong>
+        <div class="well">
+          <%= @report.achievement %>
+        </div>
+      </p>
+      <p><strong><%= t(:ndp) %></strong>
+        <div class="well">
+          <%= @report.next_day_plan %>
+        </div>
+      </p>
+      <p><strong><%= t(:fcmnt) %></strong>
+        <div class="well">
+          <%= @report.free_comment %>
+        </div>
+      </p>
+    </div>
+  </div>
+</div>
+

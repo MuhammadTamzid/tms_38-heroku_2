@@ -1,0 +1,25 @@
+<% provide(:title, current_user.name) %>
+<h1>
+  <% if params[:user_id] != nil %>
+    <%= t 'all_report_of' %> <%= User.find(params[:user_id]).name %>
+  <% else %>
+    <%= t 'all_reports' %>
+  <% end %>
+</h1>
+
+<% if params[:user_id] != nil %>
+  <%= link_to t(:export_data_to_csv), reports_path(user_id: params[:user_id], format: :csv),
+    class: "btn btn-success btn-xs" %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th><%= t(:report_date) %></th>
+    <th><%= t(:schdl) %></th>
+  </thead>
+
+  <%= render @reports %>
+
+</table>
+
+<%= will_paginate %>

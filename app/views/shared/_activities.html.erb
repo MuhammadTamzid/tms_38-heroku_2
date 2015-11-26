@@ -1,0 +1,8 @@
+<% activities.each do |activity| %>
+<tr>
+  <td><%= activity.action_type %> </td>
+  <td><%= activity.action_message %></td>
+  <td><%= time_ago_in_words(activity.created_at) %></td>
+</tr>
+<% end %>
+

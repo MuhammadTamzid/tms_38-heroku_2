@@ -1,0 +1,17 @@
+<div class="fields">
+  <%= link_to_remove_fields t(".remove_task"), f %>
+  <div class="row">
+    <div class="col-lg-4">
+      <%= f.text_field :name, class: "form-control",
+        placeholder: t("name") %>
+    </div>
+    <div class="col-lg-6">
+      <%= f.text_field :description, class: "form-control",
+        placeholder: t("description") %>
+    </div>
+    <div class="col-lg-2">
+      <%= f.number_field :task_order, class: "form-control",
+        placeholder: t("order") %>
+    </div>
+  </div>
+</div>

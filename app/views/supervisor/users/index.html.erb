@@ -1,0 +1,28 @@
+<% provide(:title, params[:role].pluralize) %>
+<h1>All <%= params[:role].pluralize %></h1>
+
+<%= form_tag supervisor_users_path, method: :get, class: "form-inline" do %>
+  <%= hidden_field_tag :role, params[:role] %>
+  <div class="form-group">
+      <%= select_tag :course_id, options_from_collection_for_select(Course.all, :id, :name, params[:course_id]), include_blank: true, class: "align_search form-control" %>
+      <%= submit_tag t(:search), name: nil, class: "submitButton btn btn-success" %>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th><%= t(:name) %></th>
+    <th><%= t(:email) %></th>
+  </thead>
+
+  <%= render @users %>
+
+</table>
+
+<%= will_paginate %>
+
+<span>
+  <br><br><br>
+</span>
+
+

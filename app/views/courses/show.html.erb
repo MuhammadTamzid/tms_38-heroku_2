@@ -1,0 +1,138 @@
+<% provide(:title, @course.name) %>
+<h1><%= t(:course_detail) %></h1>
+<div class="row">
+  <div class="panel panel-default panel-box">
+    <div class="panel-heading panel-course-name"><%= @course.name %>
+      <div class="pull-right">
+        <%= link_to t(:assign_course), courses_path,
+          class: "btn btn-default" %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <b><%= t 'progress' %>:</b>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped"
+          style="width: <%= @course.course_completed_percentage(current_user) %>%">
+            <%= @course.course_completed_percentage(current_user) %>%
+        </div>
+      </div>
+      <p>
+        <font size="3">
+          <%= t 'supervisor' %>: (<%= @course.supervisors.count %>)
+        </font>
+        <button id="btnShowSupervisor" type="button"
+          class="btn btn-default btn-xs" data-toggle="modal"
+            data-target="#divShowSupervisor">
+            <%= t 'view' %>
+        </button>
+       </p>
+      <p>
+        <font size="3">
+          <%= t 'trainee' %>: (<%= @course.trainees.count %>)
+        </font>
+        <button id="btnShowSupervisor" type="button"
+          class="btn btn-default btn-xs" data-toggle="modal"
+            data-target="#divShowTrainee">
+            <%= t 'view' %>
+        </button>
+      </p>
+      <br>
+      <div id="divShowSupervisor" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;
+                </button>
+              <h4 class="modal-title"><%= t 'supervisor' %></h4>
+            </div>
+            <div class="modal-body">
+              <% @course.supervisors.each do |supervisor| %>
+                <tr>
+                  <td>
+                    <%= gravatar_for supervisor, size: 30 %>
+                    <%= supervisor.name %>
+                    | <%= supervisor.email %>
+                    <hr>
+                  </td>
+                </tr>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left"
+                data-dismiss="modal">Close</button>
+                <%= t 'no_of_supervisor' %>
+                <%= @course.supervisors.count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="divShowTrainee" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;
+              </button>
+              <h4 class="modal-title"><%= t 'trainee' %></h4>
+            </div>
+            <div class="modal-body">
+              <% @course.trainees.each do |trainee| %>
+                <tr>
+                  <td>
+                    <%= gravatar_for trainee, size: 30 %>
+                    <%= link_to trainee.name, trainee %>
+                    | <%= trainee.email %>
+                    <hr>
+                  </td>
+                </tr>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left"
+                data-dismiss="modal"><%= t 'close_text' %></button>
+                <%= t 'no_of_trainee' %>
+                <%= @course.trainees.count %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3><%= t 'subjects' %></h3>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= t 'name' %></th>
+            <th><%= t 'description' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @subjects.each do |subject| %>
+            <tr>
+              <td>
+                <%= link_to subject.name, user_subject_path(
+                  user_id: current_user.id, course_id: @course.id,
+                    subject_id: subject.id) %>
+              </td>
+              <td><%= subject.description.truncate 120 %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+      <h3><%= t 'description' %></h3>
+      <p><%= @course.description %></p>
+    </div>
+    <div class="panel-footer panel-course-footer">
+      <div class="col-sm-2">
+        <%= t 'start_date' %>: <%= l @course.start_date, :format => :short %>
+      </div>
+      <div class="col-sm-2">
+        <%= t 'end_date' %>: <%= l @course.end_date, :format => :short %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <%= render "shared/activity_log", activities: @activities %>
+</div>

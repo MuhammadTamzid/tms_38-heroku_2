@@ -1,0 +1,80 @@
+<% provide :title, t("add_edit_enrollment") %>
+<h1><%= t(:add_edit_enrollment) %></h1>
+<h3><%= t(:course) %>: <%= @course.name %></h3> <br/>
+
+<%= form_for @course, url: supervisor_course_course_users_path(@course) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home"><%= t(:supervisor) %></a></li>
+    <li><a data-toggle="tab" href="#menu1"><%= t(:trainee) %></a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= t(:select) %></th>
+            <th><%= t(:name) %></th>
+            <th><%= t(:email) %></th>
+          </tr>
+        </thead>
+          <tbody>
+            <%= collection_check_boxes :course, :user_ids, @supervisors, :id, :name do |builder| %>
+              <tr>
+                <td class="align_checkbox"><%= builder.check_box %></td>
+                <td>
+                  <%= gravatar_for builder.object, size: 50 %>
+                  <%= link_to builder.object.name, builder.object %>
+                </td>
+                <td><%= builder.object.email %></td>
+              </tr>
+            <% end %>
+          <tbody>
+        </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= t(:select) %></th>
+            <th><%= t(:name) %></th>
+            <th><%= t(:email) %></th>
+            <th><%= t(:status) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= collection_check_boxes :course, :user_ids, @trainees, :id, :name do |builder| %>
+            <tr>
+              <td class="align_checkbox">
+                <% if builder.object.courses.current_enrolled.count > 0 && !builder.object.courses.include?(@course) %>
+                  <input type="checkbox" class="disabled" disabled="true">
+                <% else %>
+                  <%= builder.check_box %>
+                <% end %>
+              </td>
+              <td>
+                <%= gravatar_for builder.object, size: 50 %>
+                <%= link_to builder.object.name, builder.object %>
+              </td>
+              <td><%= builder.object.email %></td>
+              <td>
+                <% if builder.object.courses.current_enrolled.count > 0 && !builder.object.courses.include?(@course) %>
+                  <span><code><%= t 'has_active_course' %></code></span>
+                <% elsif builder.object.courses.include?(@course) %>
+                  <span><%= t 'enrolled_this_course' %></span>
+                <% else %>
+                  <span><%= t 'no_active_course' %></span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        <tbody>
+      </table>
+    </div>
+  </div>
+
+  <%= f.submit t(:enroll), class: "btn btn-primary" %>
+
+<% end %>

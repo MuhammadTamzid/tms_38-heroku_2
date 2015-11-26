@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  course_id: 
+  user_subject_id: 
+  action_type: 1
+  target_id: 1
+  action_message: MyText
+
+two:
+  user_id: 
+  course_id: 
+  user_subject_id: 
+  action_type: 1
+  target_id: 1
+  action_message: MyText

@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <%= link_to (l report.report_date, format: :short), params[:user_id] != nil ? report_path(report, user_id: params[:user_id]) : report %>
+  </td>
+  <td><%= report.from_time %> - <%= report.to_time %></td>
+  <td align="right">
+    <% unless params[:user_id] != nil %>
+      <%= link_to t(:edit), edit_report_path(report),
+        class: "btn btn-primary" %>
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,18 @@
+<tr>
+  <td>
+    <%= gravatar_for user, size: 50 %>
+    <%= link_to user.name, user.supervisor? ? [:supervisor, user] : user %>
+  </td>
+  <td><%= user.email %></td>
+  <td align="right">
+    <% if !user.supervisor? %>
+      <%= link_to t(:drprt), reports_path(user_id: user.id),
+        class: "btn btn-default" %>
+      <%= link_to t(:edit), edit_user_path(user),
+        class: "btn btn-primary" %>
+      <%= link_to t(:delete), [:supervisor, user], method: :delete,
+        class: "btn btn-danger",
+        data: { confirm: t(:confirm_message) } %>
+    <% end %>
+  </td>
+</tr>

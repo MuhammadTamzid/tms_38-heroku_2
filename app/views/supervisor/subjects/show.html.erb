@@ -1,0 +1,33 @@
+<% provide(:title, @subject.name) %>
+<h1><%= t(:subject_detail) %></h1>
+<div class="row">
+  <div class="panel panel-default panel-box">
+    <div class="panel-heading panel-course-name"><%= @subject.name %>
+      <div class="pull-right">
+        <%= link_to t(:view_all), supervisor_subjects_path,
+                                                    class: "btn btn-default" %>
+        <%= link_to t(:edit), edit_supervisor_subject_path(@subject),
+                                                    class: "btn btn-primary" %>
+        <%= link_to t(:delete), [:supervisor, @subject], method: :delete,
+            class: "btn btn-danger", data: { confirm: t(:confirm_message) } %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <p><%= @subject.description %></p>
+      <br>
+      <label class="tasksHeader"><%= t 'tasks' %></label>
+      <hr>
+
+      <div class="container">
+        <% @tasks.each do |task| %>
+          <div class="panel panel-success myTasks">
+            <div class="panel-heading"><%= task.name %></div>
+            <div class="panel-body maxDescription"><%= task.description %></div>
+            <div class="panel-footer"></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-footer panel-course-footer"></div>
+  </div>
+</div>

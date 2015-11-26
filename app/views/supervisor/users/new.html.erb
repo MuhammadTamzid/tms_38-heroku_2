@@ -1,0 +1,33 @@
+<h1><%= t(:add_trainee_text) %></h1>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <%= form_for [:supervisor, @user] do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'form-control' %>
+
+      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+      <%= f.submit t(:add_trainee_text), class: "btn btn-primary" %>
+    <% end %>
+
+    <br><br>
+    <h3><b><%= t 'import_trainees' %>:</b></h3>
+    <div class="form-inline">
+      <div class="form-group">
+        <%= form_tag supervisor_uploads_path, multipart: true do %>
+          <%= file_field_tag :file, class: "col-sm-8 form-control" %>
+          <%= submit_tag t(:import), class: "submitButton btn btn-primary importCsvButton" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

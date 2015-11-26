@@ -1,0 +1,28 @@
+<h1><%= params[:user_id] != nil ? t(:assign_courses) : t(:all_course) %></h1>
+
+<%= form_tag supervisor_courses_path, method: :get, class: "form-inline" do %>
+  <% if params[:user_id] != nil %>
+    <%= hidden_field_tag :user_id, params[:user_id] %>
+  <% end %>
+  <div class="form-group">
+      <%= text_field_tag :course_name, params[:course_name], class: "form-control align_search" %>
+      <%= submit_tag t(:search), name: nil, class: "submitButton btn btn-success" %>
+  </div>
+<% end %>
+
+<table class="table">
+  <thead>
+    <th><%= t 'name' %></th>
+    <th><%= t 'description' %></th>
+    <th><%= t 'start_date' %></th>
+    <th><%= t 'end_date' %></th>
+    <th><%= t 'supervisor' %></th>
+    <th><%= t 'trainee' %></th>
+    <th><%= t 'status' %></th>
+  </thead>
+
+  <%= render @courses %>
+
+</table>
+
+<%= will_paginate %>

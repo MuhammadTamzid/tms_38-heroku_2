@@ -1,0 +1,79 @@
+<% provide(:title, @subject.name) %>
+<h1><%= @course.name %></h1>
+<div class="row">
+  <div class="panel panel-default panel-box">
+    <div class="panel-heading panel-course-name"><%= @subject.name %>
+      <div class="pull-right">
+        <%= link_to t(:back), @course,
+          class: "btn btn-default" %>
+        <% if @course_subject.is_finished? %>
+          <button class="btn btn-default disabled"><b><%= t 'finished' %></b></button>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <b><%= t 'progress' %>:</b>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped"
+          style="width: <%= subject_completed_percentage(@user_subject) %>%">
+            <%= subject_completed_percentage @user_subject %>%
+        </div>
+      </div>
+      <p><%= @subject.description %></p>
+      <br>
+      <label class="tasksHeader"><%= t 'tasks' %></label>
+      <hr>
+      <%= form_for @user_subject, url: user_subject_path(@user_subject) do |f| %>
+        <div class="container">
+          <%= f.fields_for :completed_tasks do |builder| %>
+            <% if @user_subject.tasks.include?(builder.object.task) %>
+              <div class="panel panel-default myTasks">
+                <div class="panel-heading"><%= builder.object.task.name %></div>
+                <div class="panel-body maxDescription"><%= builder.object.task.description %></div>
+                <div class="panel-footer">
+                  <label class="finishCheckbox">
+                    <% if @user_subject.tasks.include?(builder.object.task) %>
+                      <%= builder.check_box :task_id, {checked: true, disabled: true} %>
+                    <% else %>
+                      <%= builder.check_box :task_id, {checked: false},
+                        builder.object.task.id %>
+                    <% end %>
+                    <%= t 'finish' %>
+                  </label>
+                </div>
+              </div>
+            <% else %>
+              <div class="panel panel-success myTasks">
+                <div class="panel-heading"><%= builder.object.task.name %></div>
+                <div class="panel-body maxDescription"><%= builder.object.task.description %></div>
+                <div class="panel-footer">
+                  <label class="finishCheckbox">
+                    <% if @user_subject.tasks.include?(builder.object.task) %>
+                      <%= builder.check_box :task_id, {checked: true, disabled: true} %>
+                    <% else %>
+                      <%= builder.check_box :task_id, {checked: false},
+                        builder.object.task.id %>
+                    <% end %>
+                    <%= t 'finish' %>
+                  </label>
+                </div>
+              </div>
+              <%= builder.hidden_field :user_id, value: @user_id %>
+            <% end %>
+          <% end %>
+        </div>
+        <center>
+          <%= f.submit t(:update), class: "btn btn-primary submitButtonHolder",
+            disabled: subject_completed_percentage(@user_subject) == 100 ||
+            @course_subject.is_finished? ||
+            @user_subject.course.is_closed? %>
+        </center>
+      <% end %>
+    </div>
+    <div class="panel-footer panel-course-footer"></div>
+  </div>
+</div>
+
+<div class="row">
+  <%= render "shared/activity_log", activities: @activities %>
+</div>

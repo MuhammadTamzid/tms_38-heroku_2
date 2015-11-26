@@ -1,0 +1,21 @@
+<tr>
+    <td><%= link_to course.name, supervisor_course_path(course) %></td>
+    <td><%= course.description.truncate 50 %></td>
+    <td><%= course.start_date %></td>
+    <td><%= course.end_date %></td>
+    <td><%= course.supervisors.count %></td>
+    <td><%= course.trainees.count %></td>
+    <td>
+      <% if course.is_closed? %>
+        <button class="btn btn-default disabled"><b><%= t 'closed' %></b></button>
+      <% else %>
+        <button class="btn btn-success disabled"><b><%= t 'open' %></b></button>
+      <% end %>
+    </td>
+    <td align="right">
+      <%= link_to t(:edit), edit_supervisor_course_path(course),
+        class: "btn btn-primary" %>
+      <%= link_to t(:delete), [:supervisor, course], method: :delete,
+        class: "btn btn-danger", data: { confirm: t(:confirm_message) } %>
+    </td>
+</tr>

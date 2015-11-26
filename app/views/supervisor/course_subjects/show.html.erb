@@ -1,0 +1,37 @@
+<% provide(:title, @subject.name) %>
+<h1><%= @course.name %></h1>
+<div class="row">
+  <div class="panel panel-default panel-box">
+    <div class="panel-heading panel-course-name"><%= @subject.name %>
+      <div class="pull-right">
+        <%= link_to t(:back), [:supervisor, @course],
+          class: "btn btn-default" %>
+        <% unless @course_subject.is_finished? %>
+          <%= link_to t("finish"),
+            supervisor_course_subject_path(@course_subject),
+            method: :patch, data: {confirm: t("confirm_message")},
+            class: "btn btn-warning" %>
+        <% else %>
+          <button class="btn btn-default disabled"><b><%= t 'finished' %></b></button>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-body">
+      <p><%= @subject.description %></p>
+      <br>
+      <label class="tasksHeader"><%= t 'tasks' %></label>
+      <hr>
+
+      <div class="container">
+        <% @tasks.each do |task| %>
+          <div class="panel panel-success myTasks">
+            <div class="panel-heading"><%= task.name %></div>
+            <div class="panel-body maxDescription"><%= task.description %></div>
+            <div class="panel-footer"></div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="panel-footer panel-course-footer"></div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<h3><%= t 'activity_log' %></h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th><%= t 'action' %></th>
+      <th><%= t 'action_for' %></th>
+      <th><%= t 'time_ago' %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render "shared/activities", activities: activities %>
+  </tbody>
+</table>
+
+<%= will_paginate activities %>

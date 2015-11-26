@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  report_date: 2015-11-26
+  from_time: MyString
+  to_time: MyString
+  achievement: MyText
+  next_day_plan: MyText
+  free_comment: MyText
+
+two:
+  user_id: 
+  report_date: 2015-11-26
+  from_time: MyString
+  to_time: MyString
+  achievement: MyText
+  next_day_plan: MyText
+  free_comment: MyText

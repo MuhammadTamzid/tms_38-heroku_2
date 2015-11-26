@@ -1,0 +1,24 @@
+<h1><%= t 'assign_courses' %></h1>
+
+<table class="table">
+  <thead>
+    <th><%= t 'name' %></th>
+    <th><%= t 'description' %></th>
+    <th><%= t 'start_date' %></th>
+    <th><%= t 'end_date' %></th>
+    <th><%= t 'supervisor' %></th>
+    <th><%= t 'trainee' %></th>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.name, course %></td>
+        <td><%= course.description.truncate 50 %></td>
+        <td><%= course.start_date %></td>
+        <td><%= course.end_date %></td>
+        <td><%= course.users.supervisors.count %></td>
+        <td><%= course.users.trainees.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

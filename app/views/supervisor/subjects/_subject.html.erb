@@ -1,0 +1,13 @@
+<tr>
+  <td><%= link_to subject.name, [:supervisor, subject] %></td>
+  <td>
+    <%= subject.description.truncate 100 %>
+  </td>
+  <td align="right">
+    <%= link_to t(:edit), edit_supervisor_subject_path(subject),
+      class: "btn btn-primary" %>
+    <%= link_to t(:delete), [:supervisor, subject], method: :delete,
+      class: "btn btn-danger",
+      data: { confirm: t(:delete_subject_confirmation_message) } %>
+  </td>
+</tr>

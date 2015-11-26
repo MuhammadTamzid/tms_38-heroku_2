@@ -1,0 +1,335 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* universal */
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.logo-img {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin: 5px 0;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* sidebar */
+
+aside {
+  section.user_info {
+    margin-top: 20px;
+  }
+  section {
+    padding: 10px 0;
+    margin-top: 20px;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.4em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.gravatar_edit {
+  margin-top: 15px;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+/* course css */
+
+.courses {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid $gray-lighter;
+  }
+}
+
+select {
+  width: 32.8%;
+}
+
+.panel-box{
+  margin-top: 0px;
+}
+
+.panel-course-name{
+  font-size: 3em;
+}
+
+.panel-course-footer{
+  height: 40px;
+}
+
+.myTasks {
+  width: 20%;
+  margin: 25px;
+  float: left;
+}
+
+.finishCheckbox{
+  width: 10px;
+  margin-right: 6px !important;
+}
+
+.maxDescription {
+  min-height: 72px;
+}
+
+.tasksHeader {
+  font-size: 25px;
+  margin-bottom: -5px !important;
+}
+
+.submitButtonHolder{
+  width: 12em;
+  margin-top: 2em;
+}
+
+.align_checkbox{
+  width: 10px
+}
+
+textarea {
+  height: 15em !important;
+}
+
+.row{
+  padding: 0px 18px;
+}
+
+.fix_margin{
+  margin-top: 10em;
+}
+.box {
+  margin-top: 2em;
+  border:1px solid #D8D8D8;
+  padding: 15px;
+}
+
+.imageFix{
+  margin-bottom: 7em;
+  -webkit-box-shadow: 10px 10px 70px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 70px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 70px 0px rgba(0,0,0,0.75);
+}
+
+.profile_align{
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 28px;
+  min-height: 160px;
+}
+
+.course{
+  font-weight: bold;
+}
+
+.subject {
+  color:rgb(248, 113, 60);
+}
+
+.btnMinWidth{
+  min-width: 94px;
+}
+
+/* search  */
+.submitButton{
+  width: auto;
+}
+
+.align_search{
+  width: 20em;
+  margin-top: 16px;
+  margin-right: 3px;
+}
+
+.importCsvButton{
+  margin-top: 2px;
+  min-width: 150px;
+  margin-left: 10px;
+}
+
+.report_data{
+  margin-left: 3em;
+}
+
+.panel-schedule{
+  font-size: 2.2em;
+}

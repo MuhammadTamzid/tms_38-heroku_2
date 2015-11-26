@@ -1,0 +1,31 @@
+<% provide(:title, t(:create_report)) %>
+<h1><%= t 'create_report' %></h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for @report do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :report_date %> <br>
+      <%= f.date_select :report_date, class: "form-control" %> <br>
+
+      <%= f.label :from_time %>
+      <%= f.text_field :from_time, class: 'form-control' %>
+
+      <%= f.label :to_time %>
+      <%= f.text_field :to_time, class: 'form-control' %>
+
+      <%= f.label :achievement %>
+      <%= f.text_area :achievement, class: 'form-control' %>
+
+      <%= f.label :next_day_plan %>
+      <%= f.text_area :next_day_plan, class: 'form-control' %>
+
+      <%= f.label :free_comment %>
+      <%= f.text_area :free_comment, class: 'form-control' %>
+
+
+      <%= f.submit t(:create_report), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

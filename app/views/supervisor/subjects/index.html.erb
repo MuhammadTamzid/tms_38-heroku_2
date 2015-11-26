@@ -1,0 +1,17 @@
+<% provide(:title, 'All Subjects') %>
+<h1><%= t(:all_subjects_text) %></h1>
+
+<%= link_to t(:export_data_to_csv), supervisor_subjects_path(format: :csv),
+  class: "btn btn-success btn-xs" %>
+
+<table class="table">
+  <thead>
+    <th><%= t(:name) %></th>
+    <th><%= t(:description) %></th>
+  </thead>
+
+  <%= render @subjects %>
+
+</table>
+
+<%= will_paginate %>
